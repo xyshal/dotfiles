@@ -69,6 +69,7 @@ if has("autocmd")
 else
 
   set autoindent		" always set autoindenting on
+  set copyindent
 
 endif " has("autocmd")
 
@@ -80,7 +81,11 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
+" Quality of life
 set number
+set smartcase
+set hidden
+set title
 
 " source code formatting
 set tabstop=2
@@ -103,3 +108,6 @@ if has('gui_running')
   colorscheme solarized
 endif
 
+" Optional full path on the statusline
+"set statusline+=%F
+"set laststatus=2

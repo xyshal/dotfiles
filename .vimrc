@@ -87,6 +87,11 @@ set smartcase
 set hidden
 set title
 
+" Folding options
+set foldmethod=syntax
+set foldlevelstart=20
+let c_no_comment_fold=1
+
 " source code formatting
 set tabstop=2
 set shiftwidth=2

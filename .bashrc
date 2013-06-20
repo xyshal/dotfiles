@@ -80,13 +80,16 @@ PS1='[\A \u@\h:\w]\$ '
 
 # Environment Variables
 export EDITOR=vim
-export CTAGS="-R --fields=+mnS"
+export CTAGS="-R --fields=+mnS" # --extra=+q --fields=+iaS
 
 # Alias definitions 
 alias la='ls -A'
 alias l='ls -la'
 alias gdiff='git difftool'
 alias brc='source ~/.bashrc'
+alias grepc='grep -rn --include=*.c'
+alias grepcpp='grep -rn --include=*.cpp'
+alias greph='grep -rn --include=*.h'
 
 # Beacon -- modeled after the Mystical MUD spell!
 beacon() {

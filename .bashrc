@@ -8,6 +8,10 @@ case $- in
       *) return;;
 esac
 
+########################################
+# Beginning of Debian-generated bashrc #
+########################################
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -35,8 +39,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set prompt
-PS1='[\A \u@\h:\w]\$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -46,22 +48,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
-fi
-
-# Alias definitions.
-alias la='ls -A'
-alias l='ls -la'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -74,9 +60,33 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# set preferred editor
-EDITOR=vim
-export EDITOR
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    #alias fgrep='fgrep --color=auto'
+    #alias egrep='egrep --color=auto'
+fi
+##################################
+# End of Debian-generated bashrc #
+##################################
+
+# Nice prompt
+PS1='[\A \u@\h:\w]\$ '
+
+# Environment Variables
+export EDITOR=vim
+export CTAGS="-R --fields=+mnS"
+
+# Alias definitions 
+alias la='ls -A'
+alias l='ls -la'
+alias gdiff='git difftool'
+alias brc='source ~/.bashrc'
 
 # Beacon -- modeled after the Mystical MUD spell!
 beacon() {

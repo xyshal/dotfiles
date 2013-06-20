@@ -95,6 +95,7 @@ nmap <C-v> :r ~/.vbuf<CR>
 map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 " Tags
+set tags=./tags;
 
 " Color schemes
 if has('gui_running')

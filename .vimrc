@@ -33,7 +33,8 @@ endif
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
+  syntax enable
+  set background=dark
   set hlsearch
 endif
 
@@ -99,8 +100,6 @@ set tags=./tags;
 
 " Color schemes
 if has('gui_running')
-  syntax enable
-  set background=dark
   colorscheme solarized
 endif
 

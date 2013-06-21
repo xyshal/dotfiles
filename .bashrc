@@ -91,6 +91,9 @@ alias grepc='grep -rn --include=*.c'
 alias grepcpp='grep -rn --include=*.cpp'
 alias greph='grep -rn --include=*.h'
 
+# VI Mode!
+set -o vi
+
 # Beacon -- modeled after the Mystical MUD spell!
 beacon() {
   if [ ! -f /home/owen/.beacon_dir ]; then

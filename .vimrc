@@ -104,9 +104,9 @@ set list
 set listchars=tab:T>
 
 " Copy paste to a local file
-vmap <C-c> :w! ~/.vbuf<CR>
-nmap <C-c> :.w! ~/.vbuf<CR>
-nmap <C-v> :r ~/.vbuf<CR>
+vmap <C-y> :w! ~/.vbuf<CR>
+nmap <C-y> :.w! ~/.vbuf<CR>
+nmap <C-p> :r ~/.vbuf<CR>
 
 " Switch between cpp/h files with F4
 map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>

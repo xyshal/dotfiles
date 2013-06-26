@@ -1,0 +1,5 @@
+autodetach on
+shell bash
+defscrollback 5000
+startup_message off
+

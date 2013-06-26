@@ -120,5 +120,5 @@ if has('gui_running')
 endif
 
 " Optional full path on the statusline
-"set statusline+=%F
-"set laststatus=2
+set statusline+=%F
+set laststatus=2

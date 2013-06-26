@@ -1,5 +1,20 @@
+# Global options
 autodetach on
 shell bash
 defscrollback 5000
 startup_message off
+
+# Keybindings
+bind + resize +10
+bind - resize -10
+bind = resize =
+bindkey -k k1 focus
+bindkey -k k2 prev
+bindkey -k k3 next
+
+# Initial windows
+screen -t vim 0
+screen -t bash 1
+screen -t ssh 2
+select 0
 

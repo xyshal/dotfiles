@@ -108,8 +108,15 @@ vmap <C-y> :w! ~/.vbuf<CR>
 nmap <C-y> :.w! ~/.vbuf<CR>
 nmap <C-p> :r ~/.vbuf<CR>
 
-" Switch between cpp/h files with F4
+" Switch between cpp/h files
 map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+
+" Switch between windows
+map <F5> <C-W>w
+
+" mapping for cycling through buffers
+map <F6> :bp<cr>
+map <F7> :bn<cr>
 
 " Tags
 set tags=./tags;

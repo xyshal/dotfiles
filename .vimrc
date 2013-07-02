@@ -118,12 +118,17 @@ map <F5> <C-W>w
 map <F6> :bp<cr>
 map <F7> :bn<cr>
 
+" persistent Copy & Paste (word)
+map <F9> viwy
+map <F10> viw"0p
+
 " Tags
 set tags=./tags;
 
 " Color schemes
 if has('gui_running')
   colorscheme solarized
+  set lines=999 columns=999
 endif
 
 " Optional full path on the statusline

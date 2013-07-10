@@ -106,3 +106,23 @@ beacon() {
   fi
 }
 
+# Silent make (except errors and warnings)
+mk() {
+  if [ $# -eq 0 ]; then
+    echo "make"
+    `make > /dev/null`
+  else
+    if [ $1 -gt 8 ]; then
+      echo "I'm sure you didn't mean that.  Setting -j8."
+      `make -j8 > /dev/null`
+    else
+      echo "make -j$1"
+      `make -j$1 > /dev/null`
+    fi
+  fi
+  if [ $? -eq 0 ]; then
+    echo "Make OK."
+  else
+    echo "Make failed."
+  fi
+}

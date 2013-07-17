@@ -6,14 +6,14 @@ set nocompatible
 set backspace=indent,eol,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup      " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+  set backup        " keep a backup file
 endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set history=50      " keep 50 lines of command line history
+set ruler           " show the cursor position all the time
+set showcmd         " display incomplete commands
+set incsearch       " do incremental searching
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -52,7 +52,7 @@ if has("autocmd")
   au!
 
   " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+  autocmd FileType text setlocal textwidth=79
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -68,7 +68,7 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
+  set autoindent
   set copyindent
 
 endif " has("autocmd")
@@ -76,9 +76,10 @@ endif " has("autocmd")
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
+" Use :diffoff to turn the diff off, :bd instead of :q
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+                  \ | wincmd p | diffthis
 endif
 
 " Quality of life
@@ -93,9 +94,10 @@ set foldlevelstart=20
 " let c_no_comment_fold=1
 
 " source code formatting
-set tabstop=2
-set shiftwidth=2
-set expandtab
+set tabstop=2         " Tabs are two spaces
+set shiftwidth=2      " Indents are 2 spaces
+set expandtab         " Spaces instead of tabs
+set tw=79             " Can use gq to wrap a visual block
 
 " Highlight actual tabs <Ctrl-V + Tab> to insert
 " an actual tab (in insertion mode)
@@ -131,6 +133,11 @@ if has('gui_running')
   set lines=999 columns=999
 endif
 
-" Optional full path on the statusline
-set statusline+=%F
+" Better statusline
+set statusline=%F       " Full path
+set statusline+=\ %m    " Modified flag
+set statusline+=\ %r    " Read only flag
+set statusline+=%=      " Left/right separator
+set statusline+=%l/%L   " Cursor line/total lines
+set statusline+=\ %c\   " Cursor column
 set laststatus=2

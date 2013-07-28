@@ -96,13 +96,13 @@ set -o vi
 
 # Beacon -- modeled after the Mystical MUD spell!
 beacon() {
-  if [ ! -f /home/owen/.beacon_dir ]; then
-    pwd > /home/owen/.beacon_dir
+  if [ ! -f ~/.beacon_dir ]; then
+    pwd > ~/.beacon_dir
     echo Set beacon: $PWD
   else
-    BEACON_DIR=$(cat /home/owen/.beacon_dir)
+    BEACON_DIR=$(cat ~/.beacon_dir)
     cd $BEACON_DIR
-    rm /home/owen/.beacon_dir
+    rm ~/.beacon_dir
   fi
 }
 
@@ -126,3 +126,9 @@ mk() {
     echo "Make failed."
   fi
 }
+
+# Load computer-specific bashrc
+if [ -f ~/.extended_bashrc ]; then
+  source ~/.extended_bashrc
+fi
+

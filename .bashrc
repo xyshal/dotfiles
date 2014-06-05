@@ -90,6 +90,7 @@ alias brc='source ~/.bashrc'
 alias grepc='grep -rn --include=*.c'
 alias grepcpp='grep -rn --include=*.cpp'
 alias greph='grep -rn --include=*.h'
+alias pwd='pwd -P'
 
 # VI Mode!
 set -o vi

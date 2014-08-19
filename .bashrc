@@ -95,6 +95,12 @@ alias pwd='pwd -P'
 # VI Mode!
 set -o vi
 
+# cd && ls
+cl() {
+  cd $*
+  ls
+}
+
 # Beacon -- modeled after the Mystical MUD spell!
 beacon() {
   if [ ! -f ~/.beacon_dir ]; then

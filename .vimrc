@@ -2,6 +2,23 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Vundle setup
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+
+" Vundle Plugins
+Plugin 'Lokaltog/vim-easymotion'
+
+" End Vundle (also required)
+call vundle#end()
+filetype plugin indent on
+
+" EasyMotion configuration
+map <Leader> <Plug>(easymotion-prefix)
+nmap s <Plug>(easymotion-s)
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -9,17 +26,13 @@ if has("vms")
   set nobackup      " do not keep a backup file, use versions instead
 else
   set backup        " keep a backup file
+  set undofile      " Global undo!
+  set undodir=~/.vim/undodir
 endif
 set history=50      " keep 50 lines of command line history
 set ruler           " show the cursor position all the time
 set showcmd         " display incomplete commands
 set incsearch       " do incremental searching
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -36,6 +49,7 @@ if &t_Co > 2 || has("gui_running")
   syntax enable
   set background=dark
   set hlsearch
+  colorscheme solarized
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -82,19 +96,31 @@ if !exists(":DiffOrig")
                   \ | wincmd p | diffthis
 endif
 
-" Quality of life
+" Appearance
 set number
-set smartcase
-set hidden
 set title
+
+" Searching
+set ignorecase smartcase
+set incsearch
+set showmatch
+
+" Auto indent
+set ai
+set smartindent
+set cinoptions +=(0
+
+" Allow buffer changes despite unwritten changes
+set hidden
 
 " Folding options
 set foldmethod=syntax
 set foldlevelstart=20
 " let c_no_comment_fold=1
 
-" source code formatting
+" Source code formatting
 set tabstop=2         " Tabs are two spaces
+set softtabstop=2
 set shiftwidth=2      " Indents are 2 spaces
 set expandtab         " Spaces instead of tabs
 set tw=79             " Can use gq to wrap a visual block
@@ -125,13 +151,10 @@ map <F9> viwy
 map <F10> viw"0p
 
 " Tags
-set tags=./tags;
-
-" Color schemes
-if has('gui_running')
-  colorscheme solarized
-  set lines=999 columns=999
-endif
+set tags=tags;
+" Remap Ctl-] to g-Ctrl-] to get the list of matches on conflicts
+nnoremap <c-]> g<c-]>
+vnoremap <c-]> g<c-]>
 
 " Better statusline
 set statusline=%F       " Full path

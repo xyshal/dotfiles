@@ -90,6 +90,7 @@ alias brc='source ~/.bashrc'
 alias grepc='grep -rn --include=*.c'
 alias grepcpp='grep -rn --include=*.cpp'
 alias greph='grep -rn --include=*.h'
+alias grepall='grep -rniI'
 alias pwd='pwd -P'
 
 # VI Mode!
@@ -119,9 +120,9 @@ mk() {
     echo "make"
     `make > /dev/null`
   else
-    if [ $1 -gt 8 ]; then
-      echo "I'm sure you didn't mean that.  Setting -j8."
-      `make -j8 > /dev/null`
+    if [ $1 -gt 12 ]; then
+      echo "I'm sure you didn't mean that.  Setting -j12."
+      `make -j12 > /dev/null`
     else
       echo "make -j$1"
       `make -j$1 > /dev/null`

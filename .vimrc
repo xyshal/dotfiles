@@ -152,6 +152,10 @@ map <F10> viw"0p
 
 " Tags
 set tags=tags;
+
+" Stop pressing Shift so much!
+nmap ; :
+
 " Remap Ctl-] to g-Ctrl-] to get the list of matches on conflicts
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>

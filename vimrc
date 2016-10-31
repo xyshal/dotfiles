@@ -10,14 +10,47 @@ Plugin 'gmarik/Vundle.vim'
 
 " Vundle Plugins
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Yggdroot/indentLine'
 
 " End Vundle (also required)
 call vundle#end()
 filetype plugin indent on
 
+" YouCompleteMe configuration
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+"let g:ycm_extra_conf_globlist = ['~/.vim/*']
+let g:ycm_extra_conf_globlist = ['~/work/*']
+let g:ycm_complete_in_strings = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1 "Might result in slowdown
+
+" To disable clang stuff in YCM
+"let g:ycm_show_diagnostics_ui = 1
+"let g:ycm_enable_diagnostic_signs = 0
+"let g:ycm_echo_current_diagnostic = 0
+"let g:ycm_enable_diagnostic_highlighting = 0
+
+" Airline-vim configuration
+let g:airline#extensions#whitespace#checks = [ 'trailing', 'mixed-indent-file', 'indent' ]
+
+"CtrlP Configuration
+let g:ctrlp_regexp = 1 "Regex search by default, since we're limited to 10 lines
+
 " EasyMotion configuration
 map <Leader> <Plug>(easymotion-prefix)
 nmap s <Plug>(easymotion-s)
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -48,7 +81,6 @@ endif
 syntax enable
 set background=dark
 if has("gui_running")
-  set hlsearch
   colorscheme solarized
 endif
 
@@ -75,7 +107,7 @@ if has("autocmd")
   " position when opening a file.
   autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
+    \   exe "normal! g`\" zz" |
     \ endif
 
   augroup END
@@ -104,6 +136,7 @@ set title
 set ignorecase smartcase
 set incsearch
 set showmatch
+set hlsearch
 
 " Auto indent
 set ai
@@ -131,10 +164,6 @@ highlight SpecialKey ctermfg=1
 set list
 set listchars=tab:T>
 
-" Copy paste to a local file
-vmap <C-y> :w! ~/.vbuf<CR>
-nmap <C-y> :.w! ~/.vbuf<CR>
-nmap <C-p> :r ~/.vbuf<CR>
 
 " Switch between cpp/h files
 map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
@@ -167,4 +196,5 @@ set statusline+=\ %r    " Read only flag
 set statusline+=%=      " Left/right separator
 set statusline+=%l/%L   " Cursor line/total lines
 set statusline+=\ %c\   " Cursor column
-set laststatus=2
+set laststatus=2        " Always show the status line
+

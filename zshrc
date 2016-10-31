@@ -19,11 +19,17 @@ alias grepc='grep -rnI --include="*.c"'
 alias grepcpp='grep -rnI --include="*.cpp" --exclude="*moc*"'
 alias greph='grep -rnI --include="*.h" --exclude="*moc*"'
 alias greppro='grep -rnI --include="*.pr*"'
+alias greppl='grep -rnI --include="*.pl"'
 alias grepall='grep -rnI --exclude "*build/*" --exclude "*svn*" --exclude "tags" --exclude "*Makefile*"'
 
 # Development aliases
 alias gdiff="git difftool -y"
-alias mk="make -j24 > /dev/null && echo \"Make OK\""
+alias mk="make -j16 > /dev/null && echo \"Make OK\""
+alias cachegrind='valgrind --tool=cachegrind --trace-children=yes'
+
+# Misc aliases
+alias dush="du -hs * | sort -h"
+alias duall="du -ahd1 | sort -h"
 
 # Global aliases (appending to other commands)
 alias -g L=" | less"
@@ -39,6 +45,12 @@ TIMEFMT="%*E total (status $?)"
 # Always ls after cd
 function chpwd() {
   ls
+}
+
+# Pipe things to this, e.g. `ls -ltr | sumcol 5`
+sumcol()
+{
+  awk "{sum+=\$$1} END {print sum}"
 }
 
 

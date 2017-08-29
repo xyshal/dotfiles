@@ -1,6 +1,5 @@
 # --------------------- ENVIRONMENT VARIABLES --------------------------------
 
-
 export EDITOR=vim
 export GDIFF="meld"
 export CTAGS="--extra=+q --fields=+imnaS --language-force=C++"
@@ -8,6 +7,7 @@ export CTAGS="--extra=+q --fields=+imnaS --language-force=C++"
 # ------------------------------- ALIASES ------------------------------------
 
 # Various command aliases
+alias ls="ls --color=auto"
 alias l="ls -ltr"
 alias pwd="pwd -P"
 alias brc="source ~/.zshrc"

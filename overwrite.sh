@@ -1,5 +1,5 @@
 echo "Overwriting dotfiles..."
-cp -v vimrc ~/.vimrc
-cp -v bashrc ~/.bashrc
-cp -v screenrc ~/.screenrc
-cp -v zshrc ~/.zshrc
+for x in bashrc screenrc vimrc zshrc; do
+  f=$(readlink -f $x)
+  ln -sf $f $HOME/.$x
+done

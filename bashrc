@@ -12,6 +12,7 @@ export EDITOR=vim
 export CTAGS="-R --fields=+mnS" # --extra=+q --fields=+iaS
 
 # Alias definitions 
+alias ls='ls --color=auto'
 alias la='ls -A'
 alias l='ls -la'
 alias gdiff='git difftool'

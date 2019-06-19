@@ -8,7 +8,7 @@ export CTAGS="--extra=+q --fields=+imnaS --language-force=C++"
 
 # Various command aliases
 alias ls="ls --color=auto"
-alias l="ls -ltr"
+alias l="ls -latr"
 alias pwd="pwd -P"
 alias brc="source ~/.zshrc"
 alias df="df -h"
@@ -26,6 +26,7 @@ alias grepall='grep -rnI --exclude "*build/*" --exclude "*svn*" --exclude "tags"
 alias gdiff="git difftool -y"
 alias mk="make -j16 > /dev/null && echo \"Make OK\""
 alias cachegrind='valgrind --tool=cachegrind --trace-children=yes'
+alias listdefined="nm -D --defined-only --demangle"
 
 # Misc aliases
 alias dush="du -hs * | sort -h"
@@ -47,12 +48,34 @@ function chpwd() {
   ls
 }
 
+addpath() {
+  export PATH="$*":"$PATH"
+}
+
+addlibpath() {
+  export LD_LIBRARY_PATH="$*":"$PATH"
+}
+
 # Pipe things to this, e.g. `ls -ltr | sumcol 5`
 sumcol()
 {
   awk "{sum+=\$$1} END {print sum}"
 }
 
+# Run until failed
+rununtilfailed() {
+  i=0
+  while true;
+    i=$(($i + 1))
+    if [ $(($i % 10)) -eq 0 ]; then
+      echo "Attempt number $i"
+    fi
+    do $*
+    if [ $? -ne 0 ]; then
+      break
+    fi
+  done
+}
 
 # ------------------ ZSH GENERAL CONFIGURATION -------------------------------
 
@@ -80,6 +103,9 @@ SAVEHIST=10000
 # Boolean options
 setopt autocd # If you type /usr , will cd /usr
 unsetopt beep
+
+# Turn off stupid warning about deleting things
+setopt rm_star_silent
 
 # VIM mode
 bindkey -v
@@ -139,4 +165,6 @@ zle -N zle-line-finish
 bindkey -M viins '^r' history-incremental-search-backward
 bindkey -M vicmd '^r' history-incremental-search-backwardmode
 
+# Core files, please
+ulimit -c unlimited
 

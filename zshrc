@@ -15,7 +15,7 @@ alias df="df -h"
 
 # Grep aliases
 alias grep="grep --color=auto"
-alias grepc='grep -rnI --include="*.c"'
+alias grepc='grep -rnI --include="*.cpp" --include="*.h" --include="*.hpp"'
 alias grepcpp='grep -rnI --include="*.cpp" --exclude="*moc*"'
 alias greph='grep -rnI --include="*.h" --exclude="*moc*"'
 alias greppro='grep -rnI --include="*.pr*"'
@@ -27,6 +27,12 @@ alias gdiff="git difftool -y"
 alias mk="make -j16 > /dev/null && echo \"Make OK\""
 alias cachegrind='valgrind --tool=cachegrind --trace-children=yes'
 alias listdefined="nm -D --defined-only --demangle"
+alias findcode='find \( -name "*.cpp" -o -name "*.h" \) -name '
+alias findclass='find -name "*.h" -name '
+
+# Environment
+alias path="echo $PATH | sed 's/:/\n/g'"
+alias libpath="echo $LD_LIBRARY_PATH | sed 's/:/\n/g'"
 
 # Misc aliases
 alias dush="du -hs * | sort -h"

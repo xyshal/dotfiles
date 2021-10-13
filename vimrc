@@ -10,13 +10,14 @@ Plugin 'gmarik/Vundle.vim'
 
 " Vundle Plugins
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'junegunn/vim-easy-align'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Yggdroot/indentLine'
+"Plugin 'scrooloose/nerdcommenter'
+"Plugin 'Yggdroot/indentLine'
+Plugin 'rhysd/vim-clang-format'
 
 " End Vundle (also required)
 call vundle#end()
@@ -25,9 +26,9 @@ filetype plugin indent on
 " YouCompleteMe configuration
 "let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 "let g:ycm_extra_conf_globlist = ['~/.vim/*']
-let g:ycm_extra_conf_globlist = ['~/work/*']
-let g:ycm_complete_in_strings = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_extra_conf_globlist = ['~/work/*']
+"let g:ycm_complete_in_strings = 0
+"let g:ycm_autoclose_preview_window_after_insertion = 1
 "let g:ycm_collect_identifiers_from_tags_files = 1 "Might result in slowdown
 
 " To disable clang stuff in YCM
@@ -52,10 +53,15 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Clang-format configuration
+let g:clang_format#detect_style_file=1
+let g:clang_format#auto_format=1
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
 set backup          " keep a backup file
+set backupdir=~/.vim/backupdir
 set undofile        " Global undo!
 set undodir=~/.vim/undodir
 set history=50      " keep 50 lines of command line history

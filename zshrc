@@ -7,7 +7,11 @@ export CTAGS="--extra=+q --fields=+imnaS --language-force=C++"
 # ------------------------------- ALIASES ------------------------------------
 
 # Various command aliases
-alias ls="ls --color=auto"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias ls="ls -G"
+else
+  alias ls="ls --color=auto"
+fi
 alias l="ls -latr"
 alias pwd="pwd -P"
 alias brc="source ~/.zshrc"

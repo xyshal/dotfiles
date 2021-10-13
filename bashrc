@@ -12,7 +12,11 @@ export EDITOR=vim
 export CTAGS="-R --fields=+mnS" # --extra=+q --fields=+iaS
 
 # Alias definitions 
-alias ls='ls --color=auto'
+if [[ "$OSNAME" == "darwin"* ]]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=auto'
+fi
 alias la='ls -A'
 alias l='ls -la'
 alias gdiff='git difftool'
@@ -65,8 +69,4 @@ mk() {
   fi
 }
 
-# Load computer-specific bashrc
-if [ -f ~/.extended_bashrc ]; then
-  source ~/.extended_bashrc
-fi
 

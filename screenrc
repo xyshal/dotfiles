@@ -1,6 +1,6 @@
 # Global options
 autodetach on
-shell bash
+shell zsh
 defscrollback 50000
 startup_message off
 
@@ -14,7 +14,6 @@ bindkey -k k3 next
 
 # Initial windows
 screen -t vim 0
-screen -t bash 1
-screen -t ssh 2
+screen -t zsh 1
 select 0
 

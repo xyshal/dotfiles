@@ -33,6 +33,7 @@ alias cachegrind='valgrind --tool=cachegrind --trace-children=yes'
 alias listdefined="nm -D --defined-only --demangle"
 alias findcode='find \( -name "*.cpp" -o -name "*.h" \) -name '
 alias findclass='find -name "*.h" -name '
+alias create-tags='ctags -R *'
 
 # Environment
 alias path="echo $PATH | sed 's/:/\n/g'"

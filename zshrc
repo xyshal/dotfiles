@@ -24,7 +24,8 @@ alias grepcpp='grep -rnI --include="*.cpp" --exclude="*moc*"'
 alias greph='grep -rnI --include="*.h" --exclude="*moc*"'
 alias greppro='grep -rnI --include="*.pr*"'
 alias greppl='grep -rnI --include="*.pl"'
-alias grepall='grep -rnI --exclude "*build/*" --exclude "*svn*" --exclude "tags" --exclude "*Makefile*"'
+alias greppy='grep -rnI --include="*.py"'
+alias grepall='grep -rnI --exclude "*build/*" --exclude "*svn*" --exclude "*.git" --exclude "tags" --exclude "*Makefile*"'
 
 # Development aliases
 alias gdiff="git difftool -y"

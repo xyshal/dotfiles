@@ -1,5 +1,8 @@
 # --------------------- ENVIRONMENT VARIABLES --------------------------------
-
+export PATH=$HOME/.local/bin:$PATH
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PATH=$HOME/Library/Python/3.10/bin:$PATH
+fi
 export EDITOR=vim
 export GDIFF="meld"
 export CTAGS="--extra=+q --fields=+imnaS --language-force=C++"
@@ -87,6 +90,23 @@ rununtilfailed() {
       break
     fi
   done
+}
+
+# This has to be a command because Mac OS is funky with expansion of variables
+# in sourced files...
+db-here() {
+  if [ -z $1 ]; then
+    container_id=$(docker run -d -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes -v $(pwd):/data mariadb:latest)
+    docker exec -it $container_id /bin/bash
+  else
+    dir=$(dirname $(readlink -f $1))
+    filename=$(basename $(readlink -f $1))
+    container_id=$(docker run -d -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes -v $dir:/data mariadb:latest)
+    echo Importing $1...
+    sleep 2
+    docker exec $container_id /bin/bash -c "mariadb < /data/$filename"
+    docker exec -it $container_id /bin/bash
+  fi
 }
 
 # ------------------ ZSH GENERAL CONFIGURATION -------------------------------

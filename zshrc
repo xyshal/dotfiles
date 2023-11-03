@@ -1,17 +1,21 @@
 # --------------------- ENVIRONMENT VARIABLES --------------------------------
 export PATH=$HOME/.local/bin:$PATH
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  export PATH=$HOME/Library/Python/3.10/bin:$PATH
+  export PATH=/opt/homebrew/bin:$PATH
+  export PATH=$PATH:/Applications/MacVim.app/Contents/bin
+  export GDIFF="kdiff3"
+else
+  export GDIFF="meld"
 fi
 export EDITOR=vim
-export GDIFF="meld"
+
 export CTAGS="--extra=+q --fields=+imnaS --language-force=C++"
 
 # ------------------------------- ALIASES ------------------------------------
 
 # Various command aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  alias ls="ls -G"
+  alias ls="gls --color=auto"
 else
   alias ls="ls --color=auto"
 fi
@@ -38,6 +42,7 @@ alias listdefined="nm -D --defined-only --demangle"
 alias findcode='find \( -name "*.cpp" -o -name "*.h" \) -name '
 alias findclass='find -name "*.h" -name '
 alias create-tags='ctags -R *'
+alias killcontainers='docker stop $(docker ps -q) && docker system prune -f && docker volume prune -f'
 
 # Environment
 alias path="echo $PATH | sed 's/:/\n/g'"
@@ -96,14 +101,15 @@ rununtilfailed() {
 # in sourced files...
 db-here() {
   if [ -z $1 ]; then
-    container_id=$(docker run -d -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes -v $(pwd):/data mariadb:latest)
+    container_id=$(docker run -d -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes -v $(pwd):/data mariadb:10)
     docker exec -it $container_id /bin/bash
   else
+    echo "Spinning up container..."
     dir=$(dirname $(readlink -f $1))
     filename=$(basename $(readlink -f $1))
-    container_id=$(docker run -d -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes -v $dir:/data mariadb:latest)
-    echo Importing $1...
-    sleep 2
+    container_id=$(docker run -d -e MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes -v $dir:/data mariadb:10)
+    sleep 5
+    echo "Importing $1 into $container_id..."
     docker exec $container_id /bin/bash -c "mariadb < /data/$filename"
     docker exec -it $container_id /bin/bash
   fi

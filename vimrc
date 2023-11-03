@@ -3,59 +3,68 @@
 set nocompatible
 
 " Vundle setup
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+if isdirectory(expand("~/.vim/bundle/Vundle.vim"))
+  filetype off
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+  Plugin 'gmarik/Vundle.vim'
 
-" Vundle Plugins
-Plugin 'Lokaltog/vim-easymotion'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'junegunn/vim-easy-align'
-"Plugin 'scrooloose/nerdcommenter'
-"Plugin 'Yggdroot/indentLine'
-Plugin 'rhysd/vim-clang-format'
+  " Vundle Plugins
+  Plugin 'Lokaltog/vim-easymotion'
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'ctrlpvim/ctrlp.vim'
+  Plugin 'junegunn/vim-easy-align'
+  "Plugin 'Valloric/YouCompleteMe'
+  "Plugin 'rhysd/vim-clang-format'
 
-" End Vundle (also required)
-call vundle#end()
-filetype plugin indent on
+  " End Vundle (also required)
+  call vundle#end()
+  filetype plugin indent on
+endif
 
-" YouCompleteMe configuration
-"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-"let g:ycm_extra_conf_globlist = ['~/.vim/*']
-"let g:ycm_extra_conf_globlist = ['~/work/*']
-"let g:ycm_complete_in_strings = 0
-"let g:ycm_autoclose_preview_window_after_insertion = 1
-"let g:ycm_collect_identifiers_from_tags_files = 1 "Might result in slowdown
-
-" To disable clang stuff in YCM
-"let g:ycm_show_diagnostics_ui = 1
-"let g:ycm_enable_diagnostic_signs = 0
-"let g:ycm_echo_current_diagnostic = 0
-"let g:ycm_enable_diagnostic_highlighting = 0
-
-" Airline-vim configuration
-let g:airline#extensions#whitespace#checks = [ 'trailing', 'mixed-indent-file', 'indent' ]
-
-"CtrlP Configuration
-let g:ctrlp_regexp = 1 "Regex search by default, since we're limited to 10 lines
-
-" EasyMotion configuration
+" Temporary, delete me
 map <Leader> <Plug>(easymotion-prefix)
 nmap s <Plug>(easymotion-s)
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+" Vundle Plugin Configuration
+if isdirectory(expand("~/.vim/bundle/Vundle.vim"))
+  if isdirectory(expand("~/.vim/bundle/YouCompleteMe"))
+    "let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+    "let g:ycm_extra_conf_globlist = ['~/.vim/*']
+    "let g:ycm_extra_conf_globlist = ['~/work/*']
+    let g:ycm_complete_in_strings = 0
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+    "let g:ycm_collect_identifiers_from_tags_files = 1 "Might result in slowdown
 
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+    " To disable clang stuff in YCM
+    "let g:ycm_show_diagnostics_ui = 1
+    "let g:ycm_enable_diagnostic_signs = 0
+    "let g:ycm_echo_current_diagnostic = 0
+    "let g:ycm_enable_diagnostic_highlighting = 0
+  endif
+  if isdirectory(expand("~/.vim/bundle/vim-airline"))
+    let g:airline#extensions#whitespace#checks = [ 'trailing', 'mixed-indent-file', 'indent' ]
+  endif
+  if isdirectory(expand("~/.vim/bundle/ctrlp"))
+    let g:ctrlp_regexp = 1 "Regex search by default, since we're limited to 10 lines
+  endif
+  if isdirectory(expand("~/.vim/bundle/vim-easymotion"))
+    map <Leader> <Plug>(easymotion-prefix)
+    nmap s <Plug>(easymotion-s)
+  endif
+  if isdirectory(expand("~/.vim/bundle/vim-easy-align"))
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
 
-" Clang-format configuration
-let g:clang_format#detect_style_file=1
-let g:clang_format#auto_format=1
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
+  endif
+  if isdirectory(expand("~/.vim/bundle/vim-clang-format"))
+    let g:clang_format#detect_style_file=1
+    let g:clang_format#auto_format=1
+  endif
+endif
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -84,6 +93,9 @@ syntax enable
 set background=dark
 if has("gui_running")
   colorscheme solarized
+  if has("macunix")
+    set guifont=Monaco:h14
+  endif
 endif
 
 " Only do this part when compiled with support for autocommands.
